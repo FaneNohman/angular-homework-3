@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {User} from "src/models";
+import {User,Post} from "src/models";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,11 @@ export class UserService {
   
   deleteUser(id:number):Observable<any>{
     return this.client.delete<User>(`${this.base_url}/users/${id}`);
+  }
+
+  getUserPosts(id:number):Observable<Post[]>{
+    var str = `${this.base_url}/users/${id}/posts`;
+    console.log(str);
+    return this.client.get<Post[]>(`${this.base_url}/users/${id}/posts`)
   }
 }
